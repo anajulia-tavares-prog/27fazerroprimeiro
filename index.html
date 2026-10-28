@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Livros de Romance</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .pagina {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .faixa-superior {
+            width: 100%;
+            height: 18vh;
+            flex-shrink: 0;
+            background: #d8d8d8;
+        }
+
+        .conteudo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        h1 {
+            font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+            font-size: clamp(38px, 5vw, 58px);
+            font-weight: normal;
+            line-height: 1.5;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .botao {
+            width: 255px;
+            height: 50px;
+            border: 1px solid #b8b8b8;
+            background: #eeeeee;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background: #dddddd;
+        }
+
+        .seta {
+            font-size: 27px;
+            color: #888;
+        }
+
+        .rodape {
+            width: 100%;
+            min-height: 110px;
+            background: #ededed;
+            border-top: 3px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .desenvolvido {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .autoras {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .separador {
+            margin: 0 12px;
+            color: #999;
+        }
+
+        .faixa-inferior {
+            width: 100%;
+            height: 7vh;
+            min-height: 35px;
+            flex-shrink: 0;
+            background: #d8d8d8;
+        }
+
+        @media (max-width: 600px) {
+            .faixa-superior {
+                height: 14vh;
+            }
+
+            h1 {
+                font-size: clamp(30px, 8vw, 42px);
+            }
+
+            .botao {
+                width: 220px;
+            }
+
+            .autoras {
+                font-size: 10px;
+            }
+
+            .separador {
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="pagina">
+
+        <div class="faixa-superior"></div>
+
+        <section class="conteudo">
+
+            <h1>Catálogo de<br>Livros de Romance</h1>
+
+            <a href="./parte2.html" class="botao">
+                <span class="seta" aria-hidden="true">→</span>
+                <span>Entrar no Catálogo</span>
+            </a>
+
+        </section>
+
+        <footer class="rodape">
+
+            <p class="desenvolvido">Desenvolvido por:</p>
+
+            <p class="autoras">
+                Ana Julia Tavares
+                <span class="separador">|</span>
+                Maria Clara Fraga de Oliveira
+            </p>
+
+        </footer>
+
+        <div class="faixa-inferior"></div>
+
+    </main>
+
+</body>
+</html>

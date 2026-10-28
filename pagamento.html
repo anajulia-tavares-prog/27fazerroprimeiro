@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar pagamento</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    min-height:100vh;
+    padding:40px 15px;
+}
+
+.container{
+    width:730px;
+    max-width:100%;
+    background:#a5a5a5;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+h1{
+    font-size:24px;
+    font-weight:normal;
+    margin-bottom:20px;
+}
+
+/* Resumo */
+.resumo{
+    width:190px;
+    background:white;
+    display:flex;
+    gap:12px;
+    padding:8px;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.capa{
+    width:45px;
+    height:65px;
+    background:#ef4da0;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-size:7px;
+}
+
+.capa strong{
+    font-size:9px;
+}
+
+.nome{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.preco{
+    background:#81c9ed;
+    padding:3px 6px;
+    font-size:13px;
+}
+
+/* Formulário */
+form{
+    width:390px;
+    max-width:100%;
+}
+
+.opcao{
+    background:#e0e0e0;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:12px;
+    cursor:pointer;
+    font-size:22px;
+}
+
+.opcao input{
+    width:25px;
+    height:25px;
+}
+
+.separador{
+    text-align:center;
+    margin:20px 0;
+    position:relative;
+    color:#444;
+    font-size:14px;
+}
+
+.separador:before,
+.separador:after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:35%;
+    height:2px;
+    background:#666;
+}
+
+.separador:before{
+    left:0;
+}
+
+.separador:after{
+    right:0;
+}
+
+.campo{
+    display:flex;
+    align-items:center;
+    background:white;
+    padding:12px;
+    margin-bottom:12px;
+    gap:12px;
+}
+
+.campo input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:14px;
+}
+
+.senha{
+    position:relative;
+}
+
+.olho{
+    cursor:pointer;
+    color:#666;
+}
+
+.dica{
+    font-size:12px;
+    margin-bottom:18px;
+    color:#333;
+}
+
+.confirmar{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#2300b8;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.confirmar:hover{
+    background:#170086;
+}
+
+.mensagem{
+    display:none;
+    margin-top:15px;
+    background:white;
+    padding:12px;
+    font-size:13px;
+}
+
+.voltar{
+    margin-top:18px;
+    display:inline-block;
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+}
+
+.voltar:hover{
+    text-decoration:underline;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Finalizar pagamento</h1>
+
+<div class="resumo">
+    <div class="capa">
+        ♡
+        <strong>O<br>ACORDO</strong>
+        ELLE KENNEDY
+    </div>
+
+    <div>
+        <div class="nome">O acordo</div>
+        <div class="preco">Total: R$ 58,41</div>
+    </div>
+</div>
+
+<form id="formPagamento">
+
+<label class="opcao">
+<input type="radio" name="pagamento" value="Pix" required>
+Pix
+</label>
+
+<label class="opcao">
+<input type="radio" name="pagamento" value="Cartão de Crédito">
+Cartão de Crédito
+</label>
+
+<label class="opcao">
+<input type="radio" name="pagamento" value="Cartão de Débito">
+Cartão de Débito
+</label>
+
+<div class="separador">Dados para contato e acesso</div>
+
+<div class="campo">
+✉
+<input type="email" placeholder="E-mail" required>
+</div>
+
+<div class="campo">
+☎
+<input type="tel" placeholder="Telefone (opcional)">
+</div>
+
+<div class="campo senha">
+🔒
+<input type="password" id="senha" placeholder="Senha" minlength="6" required>
+<span class="olho" id="olho">👁</span>
+</div>
+
+<div class="dica">Mínimo de 6 caracteres</div>
+
+<button class="confirmar" type="submit">
+Confirmar pagamento
+</button>
+
+<div class="mensagem" id="msg"></div>
+
+<a href="./parte2.html" class="voltar">
+← Voltar ao catálogo
+</a>
+
+</form>
+
+</div>
+
+<script>
+const senha=document.getElementById("senha");
+const olho=document.getElementById("olho");
+const form=document.getElementById("formPagamento");
+const msg=document.getElementById("msg");
+
+olho.onclick=function(){
+    senha.type=senha.type==="password"?"text":"password";
+};
+
+form.onsubmit=function(e){
+    e.preventDefault();
+
+    if(!form.reportValidity()) return;
+
+    const metodo=document.querySelector('input[name="pagamento"]:checked').value;
+
+    msg.style.display="block";
+    msg.innerHTML="Pagamento confirmado com sucesso!<br><br>Forma escolhida: <strong>"+metodo+"</strong><br><br><small>(Página demonstrativa.)</small>";
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - O Acordo</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            color: #222;
+            background: white;
+        }
+
+        .pagina {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #d8d8d8;
+            flex-shrink: 0;
+        }
+
+        .voltar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .voltar a {
+            color: #222;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .voltar a:hover {
+            text-decoration: underline;
+        }
+
+        .categorias {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 14px;
+            padding: 0 24px 18px;
+        }
+
+        .categoria {
+            flex: 1;
+            padding: 5px 8px;
+            text-align: center;
+            font-size: 16px;
+            color: #222;
+            text-decoration: none;
+        }
+
+        .classico {
+            background: #ead8d0;
+        }
+
+        .natureza {
+            background: #80c889;
+        }
+
+        .delicado {
+            background: #92375f;
+            color: white;
+        }
+
+        .noturno {
+            background: #ffd500;
+        }
+
+        .moderno {
+            background: #81c9ed;
+        }
+
+        .principal {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            min-height: 330px;
+        }
+
+        aside {
+            padding: 8px 18px 20px;
+            border-right: 1px solid #eee;
+        }
+
+        aside h2 {
+            font-size: 18px;
+            font-weight: normal;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 6px 10px;
+            background: #d9d9d9;
+            color: #222;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background: #c5c5c5;
+        }
+
+        .livro {
+            padding: 0 30px 25px;
+            min-width: 0;
+        }
+
+        .livro h1 {
+            text-align: center;
+            font-weight: normal;
+            font-size: 29px;
+            margin: 0 0 12px;
+        }
+
+        .detalhes {
+            display: grid;
+            grid-template-columns: 155px minmax(0, 1fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        .capa-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .capa {
+            width: 120px;
+            height: 177px;
+            background: #f05aa1;
+            color: white;
+            border: 7px solid #f05aa1;
+            outline: 1px solid #f8a4cd;
+            outline-offset: -12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 12px 6px;
+            box-shadow: inset 0 0 0 2px #f8a4cd;
+        }
+
+        .ornamento {
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        .titulo-capa {
+            font-family: Arial, sans-serif;
+            font-size: 21px;
+            font-weight: bold;
+            line-height: 1.1;
+            letter-spacing: 1px;
+        }
+
+        .autora-capa {
+            font-family: Arial, sans-serif;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+        .preco {
+            margin-top: 8px;
+            align-self: flex-start;
+            background: #e5e5e5;
+            padding: 2px 6px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+        }
+
+        .descricao {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .descricao p {
+            margin-bottom: 3px;
+        }
+
+        .sinopse {
+            margin-top: 5px;
+        }
+
+        .inferior {
+            min-height: 125px;
+            border-top: 3px solid #ccc;
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+        }
+
+        .avaliacoes {
+            border-right: 1px solid #eee;
+            padding: 16px 18px 8px;
+            font-size: 9px;
+        }
+
+        .barra {
+            background: #d9d9d9;
+            padding: 4px 8px;
+            margin-bottom: 5px;
+        }
+
+        .estrelas {
+            font-family: Arial, sans-serif;
+            color: #777;
+            font-size: 14px;
+            margin: 3px 5px 14px;
+        }
+
+        .recomendacao {
+            font-size: 9px;
+            margin: 4px 8px 8px;
+        }
+
+        .area-pagamento {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 35px;
+        }
+
+        .pagamento {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #d9d9d9;
+            color: #222;
+            text-decoration: none;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pagamento:hover {
+            background: #c7c7c7;
+        }
+
+        .faixa-final {
+            height: 7vh;
+            min-height: 35px;
+            background: #d8d8d8;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 650px) {
+            .categorias {
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 8px 10px 14px;
+            }
+
+            .categoria {
+                flex: 1 1 28%;
+                font-size: 14px;
+            }
+
+            .principal {
+                grid-template-columns: 120px minmax(0, 1fr);
+            }
+
+            aside {
+                padding: 10px 8px;
+            }
+
+            .livro {
+                padding: 8px 12px 20px;
+            }
+
+            .livro h1 {
+                font-size: 25px;
+            }
+
+            .detalhes {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 18px;
+            }
+
+            .descricao {
+                font-size: 15px;
+            }
+
+            .inferior {
+                grid-template-columns: 120px minmax(0, 1fr);
+            }
+
+            .avaliacoes {
+                padding: 12px 7px;
+            }
+
+            .area-pagamento {
+                padding: 15px;
+            }
+
+            .pagamento {
+                padding: 12px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <header>
+
+            <div class="voltar">
+                <a href="./index.html">← voltar</a>
+            </div>
+
+            <nav class="categorias">
+                <a href="#livro" class="categoria classico">clássico</a>
+                <a href="#livro" class="categoria natureza">natureza</a>
+                <a href="#livro" class="categoria delicado">delicado</a>
+                <a href="#livro" class="categoria noturno">noturno</a>
+                <a href="#livro" class="categoria moderno">moderno</a>
+            </nav>
+
+        </header>
+
+        <main class="principal">
+
+            <aside>
+
+                <h2>Menu</h2>
+
+                <nav class="menu">
+                    <a href="#livro">O acordo</a>
+                    <a href="#livro2">livro 2</a>
+                    <a href="#livro3">livro 3</a>
+                    <a href="#livro4">livro 4</a>
+                    <a href="#livro5">livro 5</a>
+                </nav>
+
+            </aside>
+
+            <section class="livro" id="livro">
+
+                <h1>O acordo</h1>
+
+                <div class="detalhes">
+
+                    <div class="capa-area">
+
+                        <div class="capa">
+                            <span class="ornamento">♡ ✧ ♡</span>
+                            <span class="titulo-capa">O<br>ACORDO</span>
+                            <span class="ornamento">✧ ♡ ✧</span>
+                            <span class="autora-capa">ELLE KENNEDY</span>
+                        </div>
+
+                        <span class="preco">R$ 58,41</span>
+
+                    </div>
+
+                    <div class="descricao">
+
+                        <p>autor : Elle Kennedy</p>
+                        <p>ano : 2016</p>
+
+                        <p class="sinopse">
+                            sinopse: O Acordo, primeiro livro da série
+                            Amores Improváveis (Off-Campus), segue
+                            Hannah, uma estudante que faz um trato com
+                            Garrett, o capitão do time de hóquei. Ela dará
+                            aulas particulares para ele em troca de um
+                            encontro falso, mas essa convivência transforma
+                            a dinâmica em algo real e inesperado.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <section class="inferior">
+
+            <div class="avaliacoes">
+
+                <div class="barra">Classificação</div>
+
+                <div class="estrelas">☆ ☆ ☆ ☆ ☆</div>
+
+                <div class="barra">Observações</div>
+
+                <p class="recomendacao">Muito recomendado</p>
+
+            </div>
+
+            <div class="area-pagamento">
+
+                <a href="./pagamento.html" class="pagamento">
+                    pagamento
+                </a>
+
+            </div>
+
+        </section>
+
+        <div class="faixa-final"></div>
+
+    </div>
+
+</body>
+</html>
