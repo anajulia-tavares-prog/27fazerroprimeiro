@@ -4,286 +4,447 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Finalizar pagamento</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f5f5f5;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    min-height:100vh;
-    padding:40px 15px;
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
-.container{
-    width:730px;
-    max-width:100%;
-    background:#a5a5a5;
-    padding:25px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
 }
 
-h1{
-    font-size:24px;
-    font-weight:normal;
-    margin-bottom:20px;
+/* QUADRO PRINCIPAL */
+
+.container {
+    width: 100%;
+    max-width: 730px;
+
+    height: min(590px, calc(100svh - 30px));
+    min-height: 0;
+
+    background: #a6a6a6;
+
+    border-radius: 6px;
+
+    padding: 16px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Resumo */
-.resumo{
-    width:190px;
-    background:white;
-    display:flex;
-    gap:12px;
-    padding:8px;
-    align-items:center;
-    margin-bottom:20px;
+/* TÍTULO */
+
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-.capa{
-    width:45px;
-    height:65px;
-    background:#ef4da0;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    font-size:7px;
+/* PRODUTO */
+
+.produto {
+    width: 190px;
+    height: 75px;
+
+    background: white;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 7px;
+    margin-bottom: 12px;
 }
 
-.capa strong{
-    font-size:9px;
+.capa {
+    width: 46px;
+    height: 61px;
+
+    background: #f05aa1;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 9px;
+    font-weight: bold;
 }
 
-.nome{
-    font-size:16px;
-    margin-bottom:5px;
+.info-produto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
 }
 
-.preco{
-    background:#81c9ed;
-    padding:3px 6px;
-    font-size:13px;
+.total {
+    background: #81c9ed;
+    padding: 4px;
+    font-size: 13px;
 }
 
-/* Formulário */
-form{
-    width:390px;
-    max-width:100%;
+/* PAGAMENTO */
+
+.opcoes {
+    width: 390px;
+    max-width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-bottom: 15px;
 }
 
-.opcao{
-    background:#e0e0e0;
-    padding:12px 16px;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin-bottom:12px;
-    cursor:pointer;
-    font-size:22px;
+.opcao {
+    height: 43px;
+    width: 100%;
+
+    background: #e0e0e0;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 0 15px;
+
+    border-radius: 5px;
+
+    font-size: 20px;
+    cursor: pointer;
 }
 
-.opcao input{
-    width:25px;
-    height:25px;
+.opcao:hover {
+    background: #eeeeee;
 }
 
-.separador{
-    text-align:center;
-    margin:20px 0;
-    position:relative;
-    color:#444;
-    font-size:14px;
+.opcao input {
+    width: 23px;
+    height: 23px;
+    accent-color: #1684ff;
+    cursor: pointer;
 }
 
-.separador:before,
-.separador:after{
-    content:"";
-    position:absolute;
-    top:50%;
-    width:35%;
-    height:2px;
-    background:#666;
+/* DIVISÓRIA */
+
+.divisoria {
+    width: 390px;
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 13px;
+
+    font-size: 14px;
+    white-space: nowrap;
+    color: #333;
 }
 
-.separador:before{
-    left:0;
+.divisoria::before,
+.divisoria::after {
+    content: "";
+    height: 2px;
+    background: #777;
+    flex: 1;
 }
 
-.separador:after{
-    right:0;
+/* CAMPOS */
+
+.campos {
+    width: 390px;
+    max-width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
 }
 
-.campo{
-    display:flex;
-    align-items:center;
-    background:white;
-    padding:12px;
-    margin-bottom:12px;
-    gap:12px;
+.campo {
+    width: 100%;
+    height: 41px;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 12px;
+
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
-.campo input{
-    border:none;
-    outline:none;
-    width:100%;
-    font-size:14px;
+.icone {
+    width: 27px;
+    font-size: 17px;
+    color: #666;
 }
 
-.senha{
-    position:relative;
+.campo input {
+    flex: 1;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+    padding: 7px;
 }
 
-.olho{
-    cursor:pointer;
-    color:#666;
+.mostrar-senha {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.dica{
-    font-size:12px;
-    margin-bottom:18px;
-    color:#333;
+/* AVISO */
+
+.aviso {
+    width: 390px;
+    max-width: 100%;
+
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 12px;
 }
 
-.confirmar{
-    width:100%;
-    padding:15px;
-    border:none;
-    background:#2300b8;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+/* BOTÃO */
+
+.confirmar {
+    width: 390px;
+    max-width: 100%;
+
+    height: 43px;
+
+    background: #2000b9;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
-.confirmar:hover{
-    background:#170086;
+.confirmar:hover {
+    background: #16008d;
 }
 
-.mensagem{
-    display:none;
-    margin-top:15px;
-    background:white;
-    padding:12px;
-    font-size:13px;
+/* TELAS MENORES */
+
+@media (max-width: 500px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .opcoes,
+    .campos,
+    .divisoria,
+    .aviso,
+    .confirmar {
+        width: 100%;
+    }
+
+    .opcao {
+        font-size: 17px;
+    }
 }
 
-.voltar{
-    margin-top:18px;
-    display:inline-block;
-    text-decoration:none;
-    color:#333;
-    font-size:14px;
-}
+@media (max-height: 580px) {
+    .container {
+        padding: 8px 20px;
+    }
 
-.voltar:hover{
-    text-decoration:underline;
+    h1 {
+        font-size: 20px;
+        margin-bottom: 7px;
+    }
+
+    .produto {
+        height: 60px;
+        margin-bottom: 7px;
+    }
+
+    .capa {
+        height: 48px;
+    }
+
+    .opcoes {
+        gap: 5px;
+        margin-bottom: 8px;
+    }
+
+    .opcao {
+        height: 35px;
+    }
+
+    .divisoria {
+        margin-bottom: 7px;
+    }
+
+    .campos {
+        gap: 5px;
+    }
+
+    .campo {
+        height: 34px;
+    }
+
+    .aviso {
+        margin: 3px 0 6px;
+    }
+
+    .confirmar {
+        height: 37px;
+    }
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
+<main class="container">
 
-<h1>Finalizar pagamento</h1>
+    <h1>Finalizar pagamento</h1>
 
-<div class="resumo">
-    <div class="capa">
-        ♡
-        <strong>O<br>ACORDO</strong>
-        ELLE KENNEDY
+    <div class="produto">
+
+        <div class="capa">
+            ♡<br>
+            O<br>
+            ACORDO<br>
+            ELLE KENNEDY
+        </div>
+
+        <div class="info-produto">
+            <span>O acordo</span>
+            <span class="total">Total: R$ 58,41</span>
+        </div>
+
     </div>
 
-    <div>
-        <div class="nome">O acordo</div>
-        <div class="preco">Total: R$ 58,41</div>
-    </div>
-</div>
+    <form id="formPagamento">
 
-<form id="formPagamento">
+        <div class="opcoes">
 
-<label class="opcao">
-<input type="radio" name="pagamento" value="Pix" required>
-Pix
-</label>
+            <label class="opcao">
+                <input type="radio" name="pagamento" value="Pix" checked>
+                <span>Pix</span>
+            </label>
 
-<label class="opcao">
-<input type="radio" name="pagamento" value="Cartão de Crédito">
-Cartão de Crédito
-</label>
+            <label class="opcao">
+                <input type="radio" name="pagamento" value="Cartão de Crédito">
+                <span>Cartão de Crédito</span>
+            </label>
 
-<label class="opcao">
-<input type="radio" name="pagamento" value="Cartão de Débito">
-Cartão de Débito
-</label>
+            <label class="opcao">
+                <input type="radio" name="pagamento" value="Cartão de Débito">
+                <span>Cartão de Débito</span>
+            </label>
 
-<div class="separador">Dados para contato e acesso</div>
+        </div>
 
-<div class="campo">
-✉
-<input type="email" placeholder="E-mail" required>
-</div>
+        <div class="divisoria">
+            Dados para contato e acesso
+        </div>
 
-<div class="campo">
-☎
-<input type="tel" placeholder="Telefone (opcional)">
-</div>
+        <div class="campos">
 
-<div class="campo senha">
-🔒
-<input type="password" id="senha" placeholder="Senha" minlength="6" required>
-<span class="olho" id="olho">👁</span>
-</div>
+            <div class="campo">
+                <span class="icone">✉</span>
+                <input type="email" id="email" placeholder="E-mail" required>
+            </div>
 
-<div class="dica">Mínimo de 6 caracteres</div>
+            <div class="campo">
+                <span class="icone">♧</span>
+                <input type="tel" id="telefone" placeholder="Telefone (opcional)">
+            </div>
 
-<button class="confirmar" type="submit">
-Confirmar pagamento
-</button>
+            <div class="campo">
+                <span class="icone">🔒</span>
+                <input type="password" id="senha" placeholder="Senha" minlength="6" required>
 
-<div class="mensagem" id="msg"></div>
+                <button type="button" class="mostrar-senha" onclick="mostrarSenha()">
+                    👁
+                </button>
+            </div>
 
-<a href="./parte2.html" class="voltar">
-← Voltar ao catálogo
-</a>
+        </div>
 
-</form>
+        <p class="aviso">Mínimo de 6 caracteres</p>
 
-</div>
+        <button type="submit" class="confirmar">
+            Confirmar pagamento
+        </button>
+
+    </form>
+
+</main>
 
 <script>
-const senha=document.getElementById("senha");
-const olho=document.getElementById("olho");
-const form=document.getElementById("formPagamento");
-const msg=document.getElementById("msg");
 
-olho.onclick=function(){
-    senha.type=senha.type==="password"?"text":"password";
-};
+function mostrarSenha() {
+    const senha = document.getElementById("senha");
 
-form.onsubmit=function(e){
-    e.preventDefault();
+    senha.type = senha.type === "password" ? "text" : "password";
+}
 
-    if(!form.reportValidity()) return;
+document.getElementById("formPagamento").addEventListener("submit", function(event) {
 
-    const metodo=document.querySelector('input[name="pagamento"]:checked').value;
+    event.preventDefault();
 
-    msg.style.display="block";
-    msg.innerHTML="Pagamento confirmado com sucesso!<br><br>Forma escolhida: <strong>"+metodo+"</strong><br><br><small>(Página demonstrativa.)</small>";
-};
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    const forma = document.querySelector('input[name="pagamento"]:checked');
+
+    if (!email || senha.length < 6 || !forma) {
+        alert("Preencha os dados corretamente!");
+        return;
+    }
+
+    alert("Simulação concluída!\nForma de pagamento: " + forma.value);
+
+});
+
 </script>
 
 </body>

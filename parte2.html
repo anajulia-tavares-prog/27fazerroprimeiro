@@ -1,439 +1,778 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - O Acordo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Livros de Romance</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
 
-        html, body {
-            width: 100%;
-            min-height: 100%;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: "Times New Roman", serif;
-            color: #222;
-            background: white;
-        }
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: "Times New Roman", serif;
+}
 
-        .pagina {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+body {
+    background: white;
+}
 
-        header {
-            background: #d8d8d8;
-            flex-shrink: 0;
-        }
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    transition: background-color 0.4s;
+}
 
-        .voltar {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-        }
+/* CABEÇALHO */
 
-        .voltar a {
-            color: #222;
-            text-decoration: none;
-            font-size: 14px;
-        }
+header {
+    width: 100%;
+    background: #d8d8d8;
+}
 
-        .voltar a:hover {
-            text-decoration: underline;
-        }
+.voltar {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
 
-        .categorias {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 14px;
-            padding: 0 24px 18px;
-        }
+.voltar a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
 
-        .categoria {
-            flex: 1;
-            padding: 5px 8px;
-            text-align: center;
-            font-size: 16px;
-            color: #222;
-            text-decoration: none;
-        }
+.categorias {
+    display: flex;
+    gap: 14px;
+    padding: 0 24px 17px;
+}
 
-        .classico {
-            background: #ead8d0;
-        }
+.categoria {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    cursor: pointer;
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    transition: 0.3s;
+}
 
-        .natureza {
-            background: #80c889;
-        }
+.classico {
+    background: #ead8d0;
+}
 
-        .delicado {
-            background: #92375f;
-            color: white;
-        }
+.natureza {
+    background: #80c889;
+}
 
-        .noturno {
-            background: #ffd500;
-        }
+.delicado {
+    background: #92375f;
+    color: white;
+}
 
-        .moderno {
-            background: #81c9ed;
-        }
+.noturno {
+    background: #ffd500;
+}
 
-        .principal {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-            min-height: 330px;
-        }
+.moderno {
+    background: #81c9ed;
+}
 
-        aside {
-            padding: 8px 18px 20px;
-            border-right: 1px solid #eee;
-        }
+.categoria:hover {
+    filter: brightness(0.92);
+}
 
-        aside h2 {
-            font-size: 18px;
-            font-weight: normal;
-            text-align: center;
-            margin-bottom: 12px;
-        }
+/* CONTEÚDO PRINCIPAL */
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
+.principal {
+    flex: 1;
+    min-height: 380px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    background: transparent;
+    transition: background-color 0.4s;
+}
 
-        .menu a {
-            display: block;
-            padding: 6px 10px;
-            background: #d9d9d9;
-            color: #222;
-            font-size: 12px;
-            text-decoration: none;
-        }
+/* MENU LATERAL */
 
-        .menu a:hover {
-            background: #c5c5c5;
-        }
+aside {
+    padding: 12px 18px 20px;
+    border-right: 1px solid #ddd;
+    background: transparent;
+}
 
-        .livro {
-            padding: 0 30px 25px;
-            min-width: 0;
-        }
+aside h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 16px;
+}
 
-        .livro h1 {
-            text-align: center;
-            font-weight: normal;
-            font-size: 29px;
-            margin: 0 0 12px;
-        }
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
 
-        .detalhes {
-            display: grid;
-            grid-template-columns: 155px minmax(0, 1fr);
-            gap: 25px;
-            align-items: start;
-        }
+.menu button {
+    width: 100%;
+    display: block;
+    padding: 10px;
+    background: #d9d9d9;
+    color: #222;
+    font-family: "Times New Roman", serif;
+    font-size: 16px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        .capa-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+.menu button:hover,
+.menu button.ativo {
+    background: #bdbdbd;
+}
 
-        .capa {
-            width: 120px;
-            height: 177px;
-            background: #f05aa1;
-            color: white;
-            border: 7px solid #f05aa1;
-            outline: 1px solid #f8a4cd;
-            outline-offset: -12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            text-align: center;
-            padding: 12px 6px;
-            box-shadow: inset 0 0 0 2px #f8a4cd;
-        }
+/* ÁREA DOS LIVROS */
 
-        .ornamento {
-            font-size: 15px;
-            letter-spacing: 2px;
-        }
+.livro {
+    padding: 5px 30px 30px;
+    background: transparent;
+    transition: background-color 0.4s;
+}
 
-        .titulo-capa {
-            font-family: Arial, sans-serif;
-            font-size: 21px;
-            font-weight: bold;
-            line-height: 1.1;
-            letter-spacing: 1px;
-        }
+.livro h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
 
-        .autora-capa {
-            font-family: Arial, sans-serif;
-            font-size: 8px;
-            letter-spacing: 1px;
-        }
+.detalhes {
+    display: grid;
+    grid-template-columns: 165px 1fr;
+    gap: 30px;
+    align-items: start;
+}
 
-        .preco {
-            margin-top: 8px;
-            align-self: flex-start;
-            background: #e5e5e5;
-            padding: 2px 6px;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-        }
+/* CAPA */
 
-        .descricao {
-            font-size: 16px;
-            line-height: 1.4;
-        }
+.capa-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .descricao p {
-            margin-bottom: 3px;
-        }
+.capa {
+    width: 125px;
+    height: 185px;
+    background: #f05aa1;
+    color: white;
+    border: 7px solid #f05aa1;
+    box-shadow: inset 0 0 0 2px #f8a4cd;
 
-        .sinopse {
-            margin-top: 5px;
-        }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding: 12px 6px;
+}
 
-        .inferior {
-            min-height: 125px;
-            border-top: 3px solid #ccc;
-            display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-        }
+.ornamento {
+    font-size: 17px;
+    letter-spacing: 2px;
+}
 
-        .avaliacoes {
-            border-right: 1px solid #eee;
-            padding: 16px 18px 8px;
-            font-size: 9px;
-        }
+.titulo-capa {
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 1.2;
+}
 
-        .barra {
-            background: #d9d9d9;
-            padding: 4px 8px;
-            margin-bottom: 5px;
-        }
+.autora-capa {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
 
-        .estrelas {
-            font-family: Arial, sans-serif;
-            color: #777;
-            font-size: 14px;
-            margin: 3px 5px 14px;
-        }
+/* PREÇO */
 
-        .recomendacao {
-            font-size: 9px;
-            margin: 4px 8px 8px;
-        }
+.preco {
+    margin-top: 15px;
+    align-self: center;
+    background: #fff0a6;
+    color: #222;
+    border: 2px solid #d6ad36;
+    border-radius: 5px;
+    padding: 10px 18px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+    white-space: nowrap;
+}
 
-        .area-pagamento {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px 35px;
-        }
+/* DESCRIÇÃO */
 
-        .pagamento {
-            display: inline-block;
-            padding: 16px 32px;
-            background: #d9d9d9;
-            color: #222;
-            text-decoration: none;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-        }
+.descricao {
+    font-size: 19px;
+    line-height: 1.6;
+}
 
-        .pagamento:hover {
-            background: #c7c7c7;
-        }
+.descricao p {
+    margin-bottom: 8px;
+}
 
-        .faixa-final {
-            height: 7vh;
-            min-height: 35px;
-            background: #d8d8d8;
-            flex-shrink: 0;
-        }
+/* PARTE INFERIOR */
 
-        @media (max-width: 650px) {
-            .categorias {
-                flex-wrap: wrap;
-                gap: 6px;
-                padding: 8px 10px 14px;
-            }
+.inferior {
+    min-height: 145px;
+    border-top: 3px solid #ccc;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    background: transparent;
+    transition: background-color 0.4s;
+}
 
-            .categoria {
-                flex: 1 1 28%;
-                font-size: 14px;
-            }
+/* CLASSIFICAÇÃO */
 
-            .principal {
-                grid-template-columns: 120px minmax(0, 1fr);
-            }
+.avaliacoes {
+    border-right: 1px solid #ddd;
+    padding: 16px 18px 8px;
+}
 
-            aside {
-                padding: 10px 8px;
-            }
+.barra {
+    background: #d9d9d9;
+    padding: 7px 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
-            .livro {
-                padding: 8px 12px 20px;
-            }
+.instrucao {
+    font-size: 14px;
+    margin: 10px 5px 5px;
+    color: #333;
+}
 
-            .livro h1 {
-                font-size: 25px;
-            }
+.estrelas {
+    display: flex;
+    gap: 5px;
+    margin: 5px;
+}
 
-            .detalhes {
-                grid-template-columns: 1fr;
-                justify-items: center;
-                gap: 18px;
-            }
+.estrelas button {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #777;
+    cursor: pointer;
+    padding: 0;
+    transition: 0.2s;
+}
 
-            .descricao {
-                font-size: 15px;
-            }
+.estrelas button:hover {
+    transform: scale(1.2);
+    color: #e5ad00;
+}
 
-            .inferior {
-                grid-template-columns: 120px minmax(0, 1fr);
-            }
+.estrelas button.selecionada {
+    color: #e5ad00;
+}
 
-            .avaliacoes {
-                padding: 12px 7px;
-            }
+#resultado-avaliacao {
+    font-size: 13px;
+    margin: 7px 5px;
+    color: #444;
+    font-weight: bold;
+}
 
-            .area-pagamento {
-                padding: 15px;
-            }
+/* PAGAMENTO */
 
-            .pagamento {
-                padding: 12px 18px;
-            }
-        }
-    </style>
+.area-pagamento {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 35px;
+}
+
+.pagamento {
+    display: inline-block;
+    padding: 17px 35px;
+    background: #d9d9d9;
+    color: #222;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.pagamento:hover {
+    background: #c7c7c7;
+}
+
+/* FAIXA FINAL */
+
+.faixa-final {
+    height: 7vh;
+    min-height: 35px;
+    background: #d8d8d8;
+    flex-shrink: 0;
+}
+
+/* CELULAR */
+
+@media (max-width: 650px) {
+
+    .categorias {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 8px 10px 14px;
+    }
+
+    .categoria {
+        flex: 1 1 28%;
+        font-size: 15px;
+    }
+
+    .principal {
+        grid-template-columns: 120px 1fr;
+    }
+
+    aside {
+        padding: 10px 8px;
+    }
+
+    aside h2 {
+        font-size: 19px;
+    }
+
+    .menu button {
+        font-size: 13px;
+        padding: 8px 5px;
+    }
+
+    .livro {
+        padding: 8px 12px 20px;
+    }
+
+    .livro h1 {
+        font-size: 27px;
+    }
+
+    .detalhes {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 18px;
+    }
+
+    .descricao {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .preco {
+        font-size: 16px;
+    }
+
+    .inferior {
+        grid-template-columns: 120px 1fr;
+    }
+
+    .avaliacoes {
+        padding: 12px 7px;
+    }
+
+    .area-pagamento {
+        padding: 15px;
+    }
+
+    .pagamento {
+        padding: 12px 18px;
+        font-size: 15px;
+    }
+
+    .estrelas button {
+        font-size: 23px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-    <div class="pagina">
+<div class="pagina" id="pagina">
 
-        <header>
+    <header>
 
-            <div class="voltar">
-                <a href="./index.html">← voltar</a>
-            </div>
+        <div class="voltar">
+            <a href="./index.html">← voltar</a>
+        </div>
 
-            <nav class="categorias">
-                <a href="#livro" class="categoria classico">clássico</a>
-                <a href="#livro" class="categoria natureza">natureza</a>
-                <a href="#livro" class="categoria delicado">delicado</a>
-                <a href="#livro" class="categoria noturno">noturno</a>
-                <a href="#livro" class="categoria moderno">moderno</a>
+        <nav class="categorias">
+
+            <button class="categoria classico"
+                onclick="mudarCor('#ead8d0')">
+                clássico
+            </button>
+
+            <button class="categoria natureza"
+                onclick="mudarCor('#80c889')">
+                natureza
+            </button>
+
+            <button class="categoria delicado"
+                onclick="mudarCor('#92375f')">
+                delicado
+            </button>
+
+            <button class="categoria noturno"
+                onclick="mudarCor('#ffd500')">
+                noturno
+            </button>
+
+            <button class="categoria moderno"
+                onclick="mudarCor('#81c9ed')">
+                moderno
+            </button>
+
+        </nav>
+
+    </header>
+
+    <main class="principal">
+
+        <aside>
+
+            <h2>Menu</h2>
+
+            <nav class="menu">
+
+                <button class="ativo" onclick="mostrarLivro(0)">
+                    O acordo
+                </button>
+
+                <button onclick="mostrarLivro(1)">
+                    O erro
+                </button>
+
+                <button onclick="mostrarLivro(2)">
+                    O jogo
+                </button>
+
+                <button onclick="mostrarLivro(3)">
+                    A conquista
+                </button>
+
+                <button onclick="mostrarLivro(4)">
+                    O legado
+                </button>
+
             </nav>
 
-        </header>
+        </aside>
 
-        <main class="principal">
+        <section class="livro">
 
-            <aside>
+            <h1 id="titulo">O acordo</h1>
 
-                <h2>Menu</h2>
+            <div class="detalhes">
 
-                <nav class="menu">
-                    <a href="#livro">O acordo</a>
-                    <a href="#livro2">livro 2</a>
-                    <a href="#livro3">livro 3</a>
-                    <a href="#livro4">livro 4</a>
-                    <a href="#livro5">livro 5</a>
-                </nav>
+                <div class="capa-area">
 
-            </aside>
+                    <div class="capa" id="capa">
 
-            <section class="livro" id="livro">
+                        <span class="ornamento">♡ ✧ ♡</span>
 
-                <h1>O acordo</h1>
+                        <span class="titulo-capa" id="tituloCapa">
+                            O<br>ACORDO
+                        </span>
 
-                <div class="detalhes">
+                        <span class="ornamento">✧ ♡ ✧</span>
 
-                    <div class="capa-area">
-
-                        <div class="capa">
-                            <span class="ornamento">♡ ✧ ♡</span>
-                            <span class="titulo-capa">O<br>ACORDO</span>
-                            <span class="ornamento">✧ ♡ ✧</span>
-                            <span class="autora-capa">ELLE KENNEDY</span>
-                        </div>
-
-                        <span class="preco">R$ 58,41</span>
+                        <span class="autora-capa">
+                            ELLE KENNEDY
+                        </span>
 
                     </div>
 
-                    <div class="descricao">
-
-                        <p>autor : Elle Kennedy</p>
-                        <p>ano : 2016</p>
-
-                        <p class="sinopse">
-                            sinopse: O Acordo, primeiro livro da série
-                            Amores Improváveis (Off-Campus), segue
-                            Hannah, uma estudante que faz um trato com
-                            Garrett, o capitão do time de hóquei. Ela dará
-                            aulas particulares para ele em troca de um
-                            encontro falso, mas essa convivência transforma
-                            a dinâmica em algo real e inesperado.
-                        </p>
-
-                    </div>
+                    <span class="preco" id="preco">
+                        R$ 58,41
+                    </span>
 
                 </div>
 
-            </section>
+                <div class="descricao">
 
-        </main>
+                    <p id="autor">
+                        Autor: Elle Kennedy
+                    </p>
 
-        <section class="inferior">
+                    <p id="ano">
+                        Ano: 2016
+                    </p>
 
-            <div class="avaliacoes">
+                    <p id="sinopse">
+                        Sinopse: O Acordo, primeiro livro da série
+                        Amores Improváveis (Off-Campus), segue Hannah,
+                        uma estudante que faz um trato com Garrett,
+                        o capitão do time de hóquei. Ela dará aulas
+                        particulares para ele em troca de um encontro
+                        falso, mas essa convivência transforma a
+                        dinâmica em algo real e inesperado.
+                    </p>
 
-                <div class="barra">Classificação</div>
-
-                <div class="estrelas">☆ ☆ ☆ ☆ ☆</div>
-
-                <div class="barra">Observações</div>
-
-                <p class="recomendacao">Muito recomendado</p>
-
-            </div>
-
-            <div class="area-pagamento">
-
-                <a href="./pagamento.html" class="pagamento">
-                    pagamento
-                </a>
+                </div>
 
             </div>
 
         </section>
 
-        <div class="faixa-final"></div>
+    </main>
 
-    </div>
+    <!-- CLASSIFICAÇÃO E PAGAMENTO -->
+
+    <section class="inferior">
+
+        <div class="avaliacoes">
+
+            <div class="barra">
+                CLASSIFICAÇÃO DO LIVRO
+            </div>
+
+            <p class="instrucao">
+                Escolha de 1 a 5 estrelas:
+            </p>
+
+            <div class="estrelas">
+
+                <button onclick="avaliar(1)">☆</button>
+                <button onclick="avaliar(2)">☆</button>
+                <button onclick="avaliar(3)">☆</button>
+                <button onclick="avaliar(4)">☆</button>
+                <button onclick="avaliar(5)">☆</button>
+
+            </div>
+
+            <p id="resultado-avaliacao">
+                Você ainda não avaliou este livro.
+            </p>
+
+        </div>
+
+        <div class="area-pagamento">
+
+            <a href="./pagamento.html" class="pagamento">
+                pagamento
+            </a>
+
+        </div>
+
+    </section>
+
+    <div class="faixa-final"></div>
+
+</div>
+
+<script>
+
+/* LIVROS */
+
+const livros = [
+
+    {
+        titulo: "O acordo",
+        capa: "O<br>ACORDO",
+        autor: "Elle Kennedy",
+        ano: "2016",
+        preco: "R$ 58,41",
+        cor: "#f05aa1",
+        sinopse: "O Acordo, primeiro livro da série Amores Improváveis (Off-Campus), segue Hannah, uma estudante que faz um trato com Garrett, o capitão do time de hóquei. Ela dará aulas particulares para ele em troca de um encontro falso, mas essa convivência transforma a dinâmica em algo real e inesperado."
+    },
+
+    {
+        titulo: "O erro",
+        capa: "O<br>ERRO",
+        autor: "Elle Kennedy",
+        ano: "2015",
+        preco: "R$ 54,90",
+        cor: "#e9b65c",
+        sinopse: "O segundo livro da série acompanha John Logan, um jogador de hóquei que está enfrentando dúvidas sobre seu futuro. Depois de conhecer Grace Ivers, ele percebe que precisa rever suas escolhas e descobrir o que realmente deseja para sua vida."
+    },
+
+    {
+        titulo: "O jogo",
+        capa: "O<br>JOGO",
+        autor: "Elle Kennedy",
+        ano: "2016",
+        preco: "R$ 56,90",
+        cor: "#75a9cf",
+        sinopse: "Neste livro, Dean Di Laurentis é um jogador de hóquei conhecido por sua confiança. Sua vida muda quando conhece Allie Hayes, uma jovem que está passando por mudanças pessoais. Os dois começam uma relação que desafia suas expectativas."
+    },
+
+    {
+        titulo: "A conquista",
+        capa: "A<br>CONQUISTA",
+        autor: "Elle Kennedy",
+        ano: "2016",
+        preco: "R$ 59,90",
+        cor: "#9c78b7",
+        sinopse: "A história acompanha Tucker, um jogador de hóquei mais tranquilo e responsável, que conhece Sabrina James. Ela tem grandes planos para o futuro e não pretende deixar que nada atrapalhe seus objetivos. Os dois precisam descobrir como conciliar seus sonhos."
+    },
+
+    {
+        titulo: "O legado",
+        capa: "O<br>LEGADO",
+        autor: "Elle Kennedy",
+        ano: "2021",
+        preco: "R$ 62,90",
+        cor: "#65a88b",
+        sinopse: "O Legado reúne novas histórias dos personagens da série Amores Improváveis. O livro mostra como estão os casais depois dos acontecimentos dos livros anteriores, trazendo momentos de suas vidas e relacionamentos."
+    }
+
+];
+
+
+/* GUARDAR AS AVALIAÇÕES DE CADA LIVRO */
+
+let avaliacoes = [0, 0, 0, 0, 0];
+
+let livroAtual = 0;
+
+
+/* MOSTRAR LIVRO */
+
+function mostrarLivro(indice) {
+
+    livroAtual = indice;
+
+    const livro = livros[indice];
+
+    document.getElementById("titulo").textContent =
+        livro.titulo;
+
+    document.getElementById("tituloCapa").innerHTML =
+        livro.capa;
+
+    document.getElementById("autor").textContent =
+        "Autor: " + livro.autor;
+
+    document.getElementById("ano").textContent =
+        "Ano: " + livro.ano;
+
+    document.getElementById("sinopse").textContent =
+        "Sinopse: " + livro.sinopse;
+
+    document.getElementById("preco").textContent =
+        livro.preco;
+
+    document.getElementById("capa").style.backgroundColor =
+        livro.cor;
+
+    document.getElementById("capa").style.borderColor =
+        livro.cor;
+
+    document.querySelectorAll(".menu button").forEach(
+        function(botao) {
+            botao.classList.remove("ativo");
+        }
+    );
+
+    document.querySelectorAll(".menu button")[indice]
+        .classList.add("ativo");
+
+    atualizarEstrelas();
+
+}
+
+
+/* MUDAR COR DO FUNDO */
+
+function mudarCor(cor) {
+
+    document.getElementById("pagina").style.backgroundColor = cor;
+
+    document.querySelector("header").style.backgroundColor = cor;
+
+    document.querySelector(".principal").style.backgroundColor = cor;
+
+    document.querySelector(".inferior").style.backgroundColor = cor;
+
+    document.querySelector("aside").style.backgroundColor = cor;
+
+    document.querySelector(".livro").style.backgroundColor = cor;
+
+}
+
+
+/* AVALIAR LIVRO */
+
+function avaliar(nota) {
+
+    avaliacoes[livroAtual] = nota;
+
+    atualizarEstrelas();
+
+}
+
+
+/* ATUALIZAR ESTRELAS */
+
+function atualizarEstrelas() {
+
+    const nota = avaliacoes[livroAtual];
+
+    const estrelas = document.querySelectorAll(
+        ".estrelas button"
+    );
+
+    estrelas.forEach(function(botao, indice) {
+
+        if (indice < nota) {
+
+            botao.textContent = "★";
+            botao.classList.add("selecionada");
+
+        } else {
+
+            botao.textContent = "☆";
+            botao.classList.remove("selecionada");
+
+        }
+
+    });
+
+    if (nota === 0) {
+
+        document.getElementById("resultado-avaliacao").textContent =
+            "Você ainda não avaliou este livro.";
+
+    } else {
+
+        document.getElementById("resultado-avaliacao").textContent =
+            "Você avaliou este livro com " + nota +
+            " de 5 estrelas!";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
